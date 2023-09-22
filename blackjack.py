@@ -83,23 +83,27 @@ def start_game():
     print("Dealer's cards are: " + Cards.print_card(deck[1]) + ", hidden")
     print("Your cards are: " + Cards.print_card(deck[0]) + ", " + Cards.print_card(deck[2]) + "\n" + "Your total is: " + str(players_count))
     if players_count == 21:
-        print("You have a BlackJack!\nCongratulations! You won!")
+        print("\nYou have a BlackJack!\nCongratulations! You won!")
         play_again()
     elif dealers_count == 21:
-        print("Dealer has a BlackJack!\nDealer won")
-    play(deck, players_count, turn)
+        print("\nDealer has a BlackJack!\nDealer won")
+    else:
+        play(deck, players_count, turn)
 def play(deck, players_count, turn):
-    choice = input("\n\nDo you want to hit or stay?\n(Type 'h' to hit and 's' to stay)\n").lower()
+    choice = input("\nDo you want to hit or stay?\n(Type 'h' to hit and 's' to stay)\n").lower()
     if choice == "h":
         players_count = Cards.count_card(deck[turn+2], players_count)
         print("Dealer's cards are: " + Cards.print_card(deck[1]) + ", hidden")
-        print("Your cards are: " + Cards.print_card(deck[0]) + ", " + Cards.print_card(deck[2])),
+        print("Your cards are: " + Cards.print_card(deck[0]) + ", " + Cards.print_card(deck[2]), end="")
         for i in range(turn):
-            print(Cards.print_card(deck[i+2])),
-        print("Your total is: " + str(players_count))
+            print(", " + Cards.print_card(deck[i+3]), end="")
+        print("\nYour total is: " + str(players_count))
         turn+=1
         if players_count == 21:
-            print("Congratulations! You won!")
+            print("\nCongratulations! You won!")
+            play_again()
+        elif players_count>21:
+            print("\nYou are busted!\nYou lost!")
             play_again()
         else:
             play(deck, players_count, turn)
