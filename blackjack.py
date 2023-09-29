@@ -15,7 +15,7 @@ class Cards:
         elif self.number == "Ace" and counter<=10:
             counter+=11
         elif self.number =="Ace" and counter>10:
-            counter+=10
+            counter+=1
         else:
             counter+=self.number
         return(counter)
