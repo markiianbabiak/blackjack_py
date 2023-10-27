@@ -16,9 +16,10 @@ class Player:
                 print("Please enter a valid number.")
 
     def win(self, bet):
-        print(f"You won ${bet * 2}!")
-        self.money += bet * 2
-        print(f"Your money now is ${self.money}")
+     print(f"You won ${bet * 2}!")
+     self.money += bet * 2 
+     print(f"Your money now is ${self.money}")
+
 
     def lose(self, bet):
         print(f"You lost your bet of ${bet}.")
@@ -28,6 +29,8 @@ class Player:
         print("It's a tie. You get your bet back.")
         self.money += bet
         print(f"Your money now is ${self.money}")
+        
+
 player = Player() 
 class Cards:
     def __init__(self, suit, number):
@@ -109,27 +112,35 @@ def create_deck():
 
 
 def start_game():
-  while True:  
-    deck = create_deck()  # Create a new deck for every game
-    bet = player.place_bet()
-    turn = 1
-    players_count = 0
-    dealers_count = 0
-    
-    players_count = deck[0].count_card(players_count)
-    players_count = deck[2].count_card(players_count)
-    dealers_count = deck[1].count_card(dealers_count)
 
-    print("Dealer's cards are: " + deck[1].print_card() + ", hidden")
-    print("Your cards are: " + deck[0].print_card() + ", " + deck[2].print_card() + "\n" + "Your total is: " + str(players_count))
-    if players_count == 21:
-        print("\nYou have a BlackJack!\nCongratulations! You won!")
-        play_again()
-    elif dealers_count == 21:
-        print("\nDealer has a BlackJack!\nDealer won")
-    else:
-      play(deck, players_count, turn, dealers_count, bet)
+    while True:
+        if player.money <= 0:
+            print("Get your money up brokie")
+            break
+
+        deck = create_deck()  # Create a new deck for every game
+        bet = player.place_bet()
+        turn = 1
+        players_count = 0
+        dealers_count = 0
+
+        players_count = deck[0].count_card(players_count)
+        players_count = deck[2].count_card(players_count)
+        dealers_count = deck[1].count_card(dealers_count)
+
+        print("Dealer's cards are: " + deck[1].print_card() + ", hidden")
+        print("Your cards are: " + deck[0].print_card() + ", " + deck[2].print_card() + "\n" + "Your total is: " + str(players_count))
+        if players_count == 21:
+            print("\nYou have a BlackJack!\nCongratulations! You won!")
+            player.win(bet)
+        elif dealers_count == 21:
+            print("\nDealer has a BlackJack!\nDealer won")
+            player.lose(bet)
+        else:
+            play(deck, players_count, turn, dealers_count, bet)
     play_again()
+
+
 def play(deck, players_count, turn, dealers_count, bet):
     choice = input("\nDo you want to hit or stay?\n(Type 'h' to hit and 's' to stay)\n").lower()
     if choice == "h":
@@ -204,7 +215,6 @@ def play_again():
         start_game()  # Restart the game
     else:
         print("Thank you for playing! See you next time.")
-
 
 
 
