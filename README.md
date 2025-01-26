@@ -1,1 +1,2 @@
 # blackjack_py
+Blackjack is a gambling card game popular in casinos throughout the world. Players hope to get a total card value of 21 or to come closer to it, without going over, than the dealer, against whom all betting is done. This is a text-based version of the game, where you can start with a certain amount of in-game money, then bet it and play against the dealer(represented by a computer algorithm) until you are bored or out of in-game cash, afterwards you can start again with your starting amount of money.
